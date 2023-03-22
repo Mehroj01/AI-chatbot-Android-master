@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.ThreadFragment">
+
+
+    <RelativeLayout
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/send_message_bg"
+        android:elevation="6dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/menuBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:visibility="invisible"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/icon" />
+
+        <EditText
+            android:id="@+id/searchEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="80dp"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/searchIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:padding="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/search_icon" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:src="@drawable/icon"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/threadTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="@string/thread"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/back" />
+
+
+
+    <ImageView
+        android:id="@+id/searchIconFr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/search_bg"
+        android:padding="12dp"
+        android:src="@drawable/search_icon"
+        app:layout_constraintEnd_toStartOf="@+id/settings"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/settings"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/search_bg"
+        android:padding="8dp"
+        android:src="@drawable/settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:translationZ="100dp"
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messageRv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="60dp"
+        tools:listitem="@layout/message_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="@+id/relative"
+        app:layout_constraintTop_toBottomOf="@id/back" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="108dp"
+        android:alpha="0.5"
+        android:background="@drawable/shadowy"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/send_message_bg"
+        android:elevation="8dp"
+        android:padding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/send_message_bg"
+            android:hint="@string/write_question"
+            android:inputType="text"
+            android:padding="10dp"
+            android:layout_marginEnd="40dp"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/send"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/send_bg"
+            android:padding="9dp"
+            android:src="@drawable/send_icon" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/questions"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="10dp"
+    android:background="@drawable/linear_bg"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/questionsTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/ask_questions"
+        android:textColor="@color/black1"
+        android:textSize="17dp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/sixYearOld"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/question1"
+            android:layout_width="@dimen/text_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/explain_how_internet_works_for_6_year_old"
+            android:textColor="@color/black1"
+            android:textSize="16dp" />
+
+        <ImageView
+            android:id="@+id/arrow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/arrow_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/skyBlue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/question2"
+            android:layout_width="@dimen/text_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/why_is_the_sky_blue"
+            android:textColor="@color/black1"
+            android:textSize="16dp" />
+
+        <ImageView
+            android:id="@+id/arrow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/arrow_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/yearsOld"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/question3"
+            android:layout_width="@dimen/text_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/got_any_creative_ideas_for_a_5_year_old_s_birthday"
+            android:textColor="@color/black1"
+            android:textSize="16dp" />
+
+        <ImageView
+            android:id="@+id/arrow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/arrow_right" />
+    </RelativeLayout>
+
+</LinearLayout>

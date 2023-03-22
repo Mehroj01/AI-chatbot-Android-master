@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/intro_bg"
+    tools:context=".intro.PageOneFragment">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/page1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="@string/powered_by_latest_ai_tech"
+        android:textColor="@color/white1"
+        android:textSize="28dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="@string/this_app_can_write_amp_understand_n_human_like_language_really_well_n_it_s_super_fast_amp_accurate"
+        android:textColor="@color/white1"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/next"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="60dp"
+        android:background="@drawable/intro_button"
+        android:elevation="8dp"
+        android:text="@string/next"
+        android:textColor="#0071F5"
+        android:textAllCaps="false"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

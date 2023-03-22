@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/relativeLayout"
+    android:background="@color/user_color"
+    android:paddingTop="0dp"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="48dp"
+        android:fontFamily="sans-serif"
+        android:layout_marginTop="0dp"
+        android:paddingTop="0dp"
+        android:text="How to design Perfect UX for app with best user interface design"
+        android:textColor="@color/black1"
+        android:textSize="17dp"
+        android:textStyle="normal" />
+
+    <ImageView
+        android:id="@+id/contextual_menu"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/menu_bg"
+        android:elevation="2dp"
+        android:padding="4dp"
+        android:src="@drawable/contextual_menu" />
+</RelativeLayout>

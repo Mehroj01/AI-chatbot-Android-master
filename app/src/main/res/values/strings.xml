@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">AI Chatbot</string>
+    <string name="click_here_to_start_the_chat">Click here to start the chat</string>
+    <string name="fast_ai">Fast AI</string>
+    <string name="you_can_ask_anything">You can ask anything...</string>
+    <string name="ask_questions">Ask Questions...</string>
+    <string name="explain_how_internet_works_for_6_year_old">“Explain how internet works for 6 year old”</string>
+    <string name="why_is_the_sky_blue">“Why is the sky blue?”</string>
+    <string name="got_any_creative_ideas_for_a_5_year_old_s_birthday">“Got any creative ideas for a 5 year old’s birthday?”</string>
+    <string name="write">Write...</string>
+    <string name="next">Next</string>
+    <string name="this_app_can_write_amp_understand_n_human_like_language_really_well_n_it_s_super_fast_amp_accurate"><![CDATA[This app can write & understand \n human-like language really well.\n It\'s super fast & accurate.]]></string>
+    <string name="powered_by_latest_ai_tech">Powered by Latest AI tech</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ask_any_questions">Ask any questions</string>
+    <string name="you_can_get_the_answers_of_any_questions_in_your_mind_related_with_work_study_or_life_in_general">You can get the answers of any questions in your mind related with work, study or life in general</string>
+    <string name="save_everything_on_a_thread">Save everything on a thread</string>
+    <string name="save_your_previous_questions_amp_answers_into_a_thread_use_search_to_find_the_right_info_at_right_time"><![CDATA[Save your previous questions & answers into a thread, use search to find the right info at right time.]]></string>
+    <string name="get_started">Get Started</string>
+    <string name="thread">Thread</string>
+    <string name="write_question">Write Question</string>
+    <string name="copy">Copy</string>
+    <string name="delete">Delete</string>
+    <string name="Speak">Speak</string>
+    <string name="share">Share</string>
+    <string name="clear_history">Clear History</string>
+    <string name="are_you_sure_you_want_to_clear_the_history">Are you sure you want to clear the history</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="settings">Settings</string>
+    <string name="sound">Sound</string>
+    <string name="font_size">Font Size</string>
+    <string name="shareApp">Share app</string>
+    <string name="tts_speed">TTS Speed</string>
+</resources>

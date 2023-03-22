@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.chat.aichatbot.fragments.HomeFragment">
+
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:src="@drawable/icon"
+        android:padding="10dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/aiText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/fast_ai"
+                android:textColor="@color/black1"
+                android:textSize="28dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/youCanText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/you_can_ask_anything"
+                android:textColor="#66000000"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/aiText" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleStatic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/youCanText"
+                tools:listitem="@layout/static_recycle_item_view" />
+
+            <!--            <LinearLayout-->
+            <!--                android:id="@+id/questions"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="10dp"-->
+            <!--                android:layout_marginTop="20dp"-->
+            <!--                android:layout_marginEnd="10dp"-->
+            <!--                android:background="@drawable/linear_bg"-->
+            <!--                android:orientation="vertical"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/youCanText">-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/questionsTV"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_margin="10dp"-->
+            <!--                    android:fontFamily="sans-serif"-->
+            <!--                    android:text="@string/ask_questions"-->
+            <!--                    android:textColor="@color/black1"-->
+            <!--                    android:textSize="17dp"-->
+            <!--                    android:textStyle="bold" />-->
+
+            <!--                <RelativeLayout-->
+            <!--                    android:id="@+id/sixYearOld"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content">-->
+
+            <!--                    <TextView-->
+            <!--                        android:id="@+id/question1"-->
+            <!--                        android:layout_width="@dimen/text_dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_margin="10dp"-->
+            <!--                        android:fontFamily="sans-serif"-->
+            <!--                        android:text="@string/explain_how_internet_works_for_6_year_old"-->
+            <!--                        android:textColor="@color/black1"-->
+            <!--                        android:textSize="16dp" />-->
+
+            <!--                    <ImageView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_alignParentEnd="true"-->
+            <!--                        android:layout_centerVertical="true"-->
+            <!--                        android:layout_marginEnd="10dp"-->
+            <!--                        android:src="@drawable/arrow_right" />-->
+            <!--                </RelativeLayout>-->
+
+            <!--                <RelativeLayout-->
+            <!--                    android:id="@+id/skyBlue"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content">-->
+
+            <!--                    <TextView-->
+            <!--                        android:id="@+id/question2"-->
+            <!--                        android:layout_width="@dimen/text_dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginStart="10dp"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginEnd="10dp"-->
+            <!--                        android:layout_marginBottom="10dp"-->
+            <!--                        android:fontFamily="sans-serif"-->
+            <!--                        android:text="@string/why_is_the_sky_blue"-->
+            <!--                        android:textColor="@color/black1"-->
+            <!--                        android:textSize="16dp" />-->
+
+            <!--                    <ImageView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_alignParentEnd="true"-->
+            <!--                        android:layout_centerVertical="true"-->
+            <!--                        android:layout_marginEnd="10dp"-->
+            <!--                        android:src="@drawable/arrow_right" />-->
+            <!--                </RelativeLayout>-->
+
+            <!--                <RelativeLayout-->
+            <!--                    android:id="@+id/yearsOld"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content">-->
+
+            <!--                    <TextView-->
+            <!--                        android:id="@+id/question3"-->
+            <!--                        android:layout_width="@dimen/text_dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginStart="10dp"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginEnd="10dp"-->
+            <!--                        android:layout_marginBottom="10dp"-->
+            <!--                        android:fontFamily="sans-serif"-->
+            <!--                        android:text="@string/got_any_creative_ideas_for_a_5_year_old_s_birthday"-->
+            <!--                        android:textColor="@color/black1"-->
+            <!--                        android:textSize="16dp" />-->
+
+            <!--                    <ImageView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_alignParentEnd="true"-->
+            <!--                        android:layout_centerVertical="true"-->
+            <!--                        android:layout_marginEnd="10dp"-->
+            <!--                        android:src="@drawable/arrow_right" />-->
+            <!--                </RelativeLayout>-->
+
+
+            <!--            </LinearLayout>-->
+
+            <!--            <LinearLayout-->
+            <!--                android:id="@+id/write"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="10dp"-->
+            <!--                android:layout_marginTop="20dp"-->
+            <!--                android:layout_marginEnd="10dp"-->
+            <!--                android:background="@drawable/linear_bg"-->
+            <!--                android:orientation="vertical"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/questions">-->
+
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/writeTV"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_margin="10dp"-->
+            <!--                    android:fontFamily="sans-serif"-->
+            <!--                    android:text="@string/write"-->
+            <!--                    android:textColor="@color/black1"-->
+            <!--                    android:textSize="17dp"-->
+            <!--                    android:textStyle="bold" />-->
+
+            <!--                <RelativeLayout-->
+            <!--                    android:id="@+id/sixYearOld"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content">-->
+
+            <!--                    <TextView-->
+            <!--                        android:id="@+id/question4"-->
+            <!--                        android:layout_width="@dimen/text_dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_margin="10dp"-->
+            <!--                        android:fontFamily="sans-serif"-->
+            <!--                        android:text="“Write a tweet about self motivation”"-->
+            <!--                        android:textColor="@color/black1"-->
+            <!--                        android:textSize="16dp" />-->
+
+            <!--                    <ImageView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_alignParentEnd="true"-->
+            <!--                        android:layout_centerVertical="true"-->
+            <!--                        android:layout_marginEnd="10dp"-->
+            <!--                        android:src="@drawable/arrow_right" />-->
+            <!--                </RelativeLayout>-->
+            <!--                <RelativeLayout-->
+            <!--                    android:id="@+id/skyBlue"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content">-->
+
+            <!--                    <TextView-->
+            <!--                        android:id="@+id/question2"-->
+            <!--                        android:layout_width="@dimen/text_dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginStart="10dp"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginEnd="10dp"-->
+            <!--                        android:layout_marginBottom="10dp"-->
+            <!--                        android:fontFamily="sans-serif"-->
+            <!--                        android:text="@string/why_is_the_sky_blue"-->
+            <!--                        android:textColor="@color/black1"-->
+            <!--                        android:textSize="16dp" />-->
+
+            <!--                    <ImageView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_alignParentEnd="true"-->
+            <!--                        android:layout_centerVertical="true"-->
+            <!--                        android:layout_marginEnd="10dp"-->
+            <!--                        android:src="@drawable/arrow_right" />-->
+            <!--                </RelativeLayout>-->
+            <!--                <RelativeLayout-->
+            <!--                    android:id="@+id/yearsOld"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content">-->
+
+            <!--                    <TextView-->
+            <!--                        android:id="@+id/question3"-->
+            <!--                        android:layout_width="@dimen/text_dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginStart="10dp"-->
+            <!--                        android:layout_marginTop="10dp"-->
+            <!--                        android:layout_marginEnd="10dp"-->
+            <!--                        android:layout_marginBottom="10dp"-->
+            <!--                        android:fontFamily="sans-serif"-->
+            <!--                        android:text="@string/got_any_creative_ideas_for_a_5_year_old_s_birthday"-->
+            <!--                        android:textColor="@color/black1"-->
+            <!--                        android:textSize="16dp" />-->
+
+            <!--                    <ImageView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_alignParentEnd="true"-->
+            <!--                        android:layout_centerVertical="true"-->
+            <!--                        android:layout_marginEnd="10dp"-->
+            <!--                        android:src="@drawable/arrow_right" />-->
+            <!--                </RelativeLayout>-->
+
+            <!--            </LinearLayout>-->
+
+            <!--            <LinearLayout-->
+            <!--                android:id="@+id/translate"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="120dp"-->
+            <!--                android:layout_margin="10dp"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:background="@drawable/linear_bg"-->
+            <!--                android:orientation="vertical"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/write">-->
+
+            <!--            </LinearLayout>-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="0.02"
+        android:text="Invento"
+        android:textColor="@color/black1"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/back" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="218dp"
+        android:alpha="0.5"
+        android:background="@drawable/shadowy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/startChat"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/send_button"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/send_icon" />
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="1dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.03"
+            android:src="@drawable/send_icon"
+            android:text="@string/click_here_to_start_the_chat"
+            android:textColor="@color/white"
+            android:textSize="17dp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
