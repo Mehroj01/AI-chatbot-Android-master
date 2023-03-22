@@ -7,11 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.chat.aichatbot.R
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PageTwoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PageTwoFragment : Fragment() {
 
 

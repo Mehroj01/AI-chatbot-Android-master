@@ -46,6 +46,3 @@ class CustomSpinnerAdapter(context: Context, private val values: List<String>) :
     }
 }
 
-//val adapter = CustomSpinnerAdapter(this, listOf("Option 1", "Option 2", "Option 3"))
-//spinner.adapter = adapter
-

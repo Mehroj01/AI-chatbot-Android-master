@@ -35,20 +35,10 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.LinkedHashSet
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+
 
 class MainFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     private var _binding: FragmentMainBinding? = null
     private lateinit var spinnerAdapter: CustomSpinnerAdapter
@@ -166,11 +156,11 @@ class MainFragment : Fragment() {
                     }
 
                     override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                        // Handle touch event when user starts sliding the thumb
+
                     }
 
                     override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                        // Handle touch event when user stops sliding the thumb
+
                     }
                 })
 
@@ -194,7 +184,7 @@ class MainFragment : Fragment() {
                     }
 
                     override fun onNothingSelected(parent: AdapterView<*>) {
-                        // Handle case where nothing is selected
+
                     }
 
                     override fun onItemClick(

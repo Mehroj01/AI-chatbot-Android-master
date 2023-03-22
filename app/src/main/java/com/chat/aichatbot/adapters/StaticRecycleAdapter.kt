@@ -19,8 +19,6 @@ class StaticRecycleAdapter(
 
     }
 
-    // Create new views (
-    // invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             StaticRecycleItemViewBinding.inflate(
@@ -32,7 +30,6 @@ class StaticRecycleAdapter(
         return ViewHolder(binding)
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
             val module = list[position]

@@ -50,7 +50,6 @@ class ThreadFragment : Fragment(R.layout.fragment_thread) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
             threadModule = it.getSerializable("thread") as ThreadModule
             message = it.getString("message")
         }
@@ -211,11 +210,11 @@ class ThreadFragment : Fragment(R.layout.fragment_thread) {
                     }
 
                     override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                        // Handle touch event when user starts sliding the thumb
+
                     }
 
                     override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                        // Handle touch event when user stops sliding the thumb
+
                     }
                 })
 
@@ -506,21 +505,6 @@ class ThreadFragment : Fragment(R.layout.fragment_thread) {
             appDatabase.threadDao().deleteThread(threadModule!!)
         }
     }
-
-//    fun speakFun(message: String, actualProgress: Float) {
-//        textToSpeech =
-//            TextToSpeech(requireActivity().applicationContext) { status ->
-//                if (status == TextToSpeech.SUCCESS) {
-//                    textToSpeech!!.language = Locale.US
-//                    textToSpeech!!.setSpeechRate(actualProgress)
-//                    textToSpeech!!.speak(
-//                        message,
-//                        TextToSpeech.QUEUE_FLUSH,
-//                        null,
-//                    )
-//                }
-//            }
-//    }
 
     fun speakFun(message: String, actualProgress: Float) {
         if (textToSpeech == null) {
