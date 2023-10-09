@@ -22,7 +22,7 @@
         android:fontFamily="sans-serif"
         android:text="Thread 1"
         android:textColor="@color/black1"
-        android:textSize="17sp"
+        android:textSize="19sp"
         android:textStyle="bold" />
 
     <ImageView
@@ -42,12 +42,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/threadNum"
-        android:layout_marginTop="20dp"
         android:fontFamily="sans-serif"
-        android:text="1. Got creative ideas for businesscjdnnjcdnjdcjncdcdnjcdnjjdncdcnjjdncdnjcdncjnjdcjjdcnnjdcjdncdnjcnjcdjdncjn\n\n 2.cjncdnjdjncjdncjnndcnjcncjddjcnnjcdnjcdnjdcjcdnjcndjcnjcdnjcdjnenfjnenfej"
+        android:padding="2dp"
+        android:text="“Explain how internet works for \n 6 year old
+    Why is the sky blue?,
+    “Got any creative ideas for a 5 year
+    old’s birthday?”"
         android:textColor="@color/black1"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textSize="17sp"
+        android:textStyle="normal" />
 
 
     <TextView
@@ -62,8 +65,8 @@
         android:padding="9dp"
         android:text="12 more questions"
         android:textColor="#007BFF"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        android:visibility="gone" />
+        android:textSize="16dp"
+        android:visibility="gone"
+        android:textStyle="bold" />
 
 </RelativeLayout>

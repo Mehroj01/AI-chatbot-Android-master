@@ -31,5 +31,19 @@
     <string name="sound">Sound</string>
     <string name="font_size">Font Size</string>
     <string name="shareApp">Share app</string>
-    <string name="tts_speed">TTS Speed</string>
+    <string name="tts_speed">Text to speech speed</string>
+    <string name="you_have_3_free_message_left">You have 10 free message left</string>
+    <string name="go_pro">Go Pro</string>
+    <string name="data_is_not_found">Data is not found</string>
+    <string name="unlimited_answers">Unlimited answers</string>
+    <string name="try_for_free">Try for free</string>
+    <string name="unlimited_answers_amp_questions"><![CDATA[Unlimited answers & Questions]]></string>
+    <string name="best_app_experience">Best app experience</string>
+    <string name="_4x_faster_processing">4x Faster processing</string>
+    <string name="more_detailed_responses">More detailed responses</string>
+    <string name="_3_day_trial_auto_renews_at_week_no_commitment_cancel_any_time_full_access_to_app_and_all_features_no_extra_charge_for_any_features">  day trial auto-renews at $   /monthly. No commitment. Cancel any time. Full access to app and all features, no extra charge for any features.</string>
+    <string name="restore">Restore</string>
+    <string name="privacy_and_policy">Privacy policy</string>
+    <string name="terms_of_use">Terms of use</string>
+    <string name="out_of_free_messages">Your free message quota has been reached. A subscription is required to continue using the app.\n\nWe want to provide you with the best possible search experience with latest AI technology. However, generating human-like search results comes at a significant cost, which is why we require a subscription for full access.</string>
 </resources>

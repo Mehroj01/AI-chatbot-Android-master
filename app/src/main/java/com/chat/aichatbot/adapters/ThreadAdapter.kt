@@ -47,21 +47,36 @@ class ThreadAdapter(
                 extraQuestions.text = "${messages.size - 4} more questions"
                 var string = ""
                 for (i in 0 until 4) {
-                    string += "${i + 1}. ${messages[i].message}\n"
+                    string += if (i == 0) {
+                        "\n${i + 1}. ${messages[i].message}"
+                    } else {
+                        "\n" +
+                                "\n${i + 1}. ${messages[i].message}"
+                    }
                 }
                 questions.text = string
                 extraQuestions.setOnClickListener {
                     var string1 = ""
                     for (i in messages.indices) {
-                        string1 += "${i + 1}. ${messages[i].message}\n"
-                        questions.text = string1
+                        if (i == 0) {
+                            string1 += "\n${i + 1}. ${messages[i].message}"
+                        }else {
+                            string1 += "\n" +
+                                    "\n${i + 1}. ${messages[i].message}"
+                            questions.text = string1
+                        }
                     }
                     extraQuestions.visibility = View.GONE
                 }
             } else {
                 var string = ""
                 for (i in messages.indices) {
-                    string += "${i + 1}. ${messages[i].message}\n"
+                    string += if (i == 0) {
+                        "\n${i + 1}. ${messages[i].message}"
+                    } else {
+                        "\n" +
+                                "\n${i + 1}. ${messages[i].message}"
+                    }
                 }
                 questions.text = string
                 extraQuestions.visibility = View.GONE

@@ -17,22 +17,28 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.android.billingclient.api.*
 import com.chat.aichatbot.R
 import com.chat.aichatbot.adapters.CustomSpinnerAdapter
 import com.chat.aichatbot.adapters.MessageAdapter
 import com.chat.aichatbot.databinding.FragmentThreadBinding
 import com.chat.aichatbot.models.Message
 import com.chat.aichatbot.models.MessageModule
+import com.chat.aichatbot.models.MessageX
+import com.chat.aichatbot.models.RequestBody
 import com.chat.aichatbot.room.AppDatabase
 import com.chat.aichatbot.room.ThreadModule
 import com.chat.aichatbot.utils.*
 import com.chat.aichatbot.viewmodels.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.runBlocking
+import java.io.IOException
 import java.net.SocketTimeoutException
+import java.security.Signature
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.LinkedHashSet
@@ -46,7 +52,6 @@ class ThreadFragment : Fragment(R.layout.fragment_thread) {
     private var threadModule: ThreadModule? = null
     private var message: String? = null
     private var isSearchBar: Boolean = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -54,7 +59,6 @@ class ThreadFragment : Fragment(R.layout.fragment_thread) {
             message = it.getString("message")
         }
     }
-
 
     private var _binding: FragmentThreadBinding? = null
     private lateinit var spinnerAdapter: CustomSpinnerAdapter
@@ -73,9 +77,11 @@ class ThreadFragment : Fragment(R.layout.fragment_thread) {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentThreadBinding.inflate(inflater, container, false)
+
         appDatabase = AppDatabase.getInstance(requireContext())
         spinnerAdapter = CustomSpinnerAdapter(requireContext(), TextSizeValue.sizeInDesign())
         mySharedPreference = MySharedPreference(requireContext())
+
         val progress = mySharedPreference.getPreferences(Constants.SLIDER_PROGRESS)
         if (progress != "") {
             actualProgress = (progress!!.toFloat()) / 100
@@ -89,8 +95,14 @@ class ThreadFragment : Fragment(R.layout.fragment_thread) {
         messageAdapter =
             MessageAdapter(ArrayList(messagesList), object : MessageAdapter.ItemOnClickListener {
                 override fun speak(module: MessageModule) {
-                    messageSpeech = module.message
-                    speakFun(module.message, actualProgress)
+                    val checked = mySharedPreference.getPreferences(Constants.CHECKED)
+                    if (checked != "") {
+                        if (checked.toBoolean()) {
+                            messageSpeech = module.message
+                            speakFun(module.message, actualProgress)
+                        }
+                    }
+
                 }
 
                 override fun deleteItem(
@@ -112,6 +124,10 @@ class ThreadFragment : Fragment(R.layout.fragment_thread) {
                     }
                 }
 
+                override fun navigate() {
+                    findNavController().navigate(R.id.trialFragment)
+                }
+
             }, requireContext())
 
 
@@ -121,15 +137,47 @@ class ThreadFragment : Fragment(R.layout.fragment_thread) {
             requestTheApi(message!!)
         }
 
-
         binding.apply {
+            val boolean = mySharedPreference.getBoolPreference(Constants.PROMO_ACTIVE)
+            if (boolean) {
+                binding.promoOffer.visibility = View.GONE
+            } else {
+                val count = mySharedPreference.getIntPreference(Constants.FREE_MESSAGES_COUNT)
+                if (count != -1) {
+                    viewModel.setTheCount(count)
+                } else {
+                    viewModel.setTheCount(10)
+                }
+
+                viewModel.freeMessageCount.observe(viewLifecycleOwner) {
+                    if (it >= 0) {
+                        mySharedPreference.setIntPreference(Constants.FREE_MESSAGES_COUNT, it)
+                    }
+                    if (it >= 0) {
+                        if (it == 0) {
+                            messagesLeft.setTextColor(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    android.R.color.holo_red_light
+                                )
+                            )
+                        }
+                        messagesLeft.text = "You have free $it messages left"
+                    } else {
+                        messageAdapter.setOutOfMessages(
+                            MessageModule(-1, -1, false, ""),
+                            binding.messageRv
+                        )
+                    }
+                }
+            }
 
             settings.setOnClickListener {
                 val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
                 val view = LayoutInflater.from(requireContext())
                     .inflate(R.layout.settings_bottom_sheet, null)
                 dialog.setContentView(view)
-                dialog.setCancelable(false)
+                dialog.setCancelable(true)
                 val back = view.findViewById<ImageView>(R.id.back)
                 val spinnerView = view.findViewById<Spinner>(R.id.sizesSpinner)
                 val slider = view.findViewById<SeekBar>(R.id.speedSeekBar)
@@ -270,6 +318,7 @@ class ThreadFragment : Fragment(R.layout.fragment_thread) {
                 searchEdit.hint = "Search..."
                 settings.visibility = View.INVISIBLE
                 menuBar.visibility = View.VISIBLE
+                back.visibility = View.INVISIBLE
                 searchEdit.requestFocus()
                 val inputMethodManager =
                     requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -277,73 +326,81 @@ class ThreadFragment : Fragment(R.layout.fragment_thread) {
                     searchEdit,
                     InputMethodManager.SHOW_IMPLICIT
                 )
-                if (!isSearchBar) {
-                    menuBar.setOnClickListener {
-                        settings.visibility = View.VISIBLE
-                        val imm =
-                            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                        imm.hideSoftInputFromWindow(requireView().windowToken, 0)
-                        searchEdit.setText("")
-                        isSearchBar = false
-                        searchIcon.setImageResource(R.drawable.search_icon)
-                        searchEdit.visibility = View.INVISIBLE
-                        menuBar.visibility = View.GONE
-                        searchBar.visibility = View.GONE
-                    }
-
-                    searchEdit.addTextChangedListener(object : TextWatcher {
-                        override fun beforeTextChanged(
-                            s: CharSequence?,
-                            start: Int,
-                            count: Int,
-                            after: Int
-                        ) {
-
-                        }
-
-                        override fun onTextChanged(
-                            s: CharSequence?,
-                            start: Int,
-                            before: Int,
-                            count: Int
-                        ) {
-                            if (s != null) {
-                                if (s.toString() != "") {
-                                    filterByText(s.toString())
-                                } else {
-                                    messageAdapter.setList(
-                                        appDatabase.messageDao()
-                                            .getThreadMessages(threadModule!!.id)
-                                    )
-                                }
-                            }
-
-                        }
-
-                        override fun afterTextChanged(s: Editable?) {
-
-                        }
-
-                    })
-                    isSearchBar = true
-                } else {
+                menuBar.setOnClickListener {
+                    val imm =
+                        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(requireView().windowToken, 0)
                     searchEdit.setText("")
+                    isSearchBar = false
+                    searchIcon.setImageResource(R.drawable.search_icon)
+                    searchEdit.visibility = View.INVISIBLE
+                    menuBar.visibility = View.GONE
+                    settings.visibility = View.VISIBLE
+                    back.visibility = View.VISIBLE
+                    searchBar.visibility = View.GONE
                 }
 
+                searchIcon.setOnClickListener {
+                    searchEdit.setText("")
+                    isSearchBar = false
+                }
+
+                searchEdit.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                        if (s != null) {
+                            if (s.toString() != "") {
+                                filterByText(s.toString())
+                            } else {
+                                messageAdapter.setList(
+                                    appDatabase.messageDao()
+                                        .getThreadMessages(threadModule!!.id)
+                                )
+                            }
+                        }
+
+                    }
+
+                    override fun afterTextChanged(s: Editable?) {
+
+                    }
+
+                })
+                isSearchBar = true
 
             }
+
             viewModel.chatResponse.observe(viewLifecycleOwner) {
                 when (it) {
                     is EventLoader.Success -> {
-                        messageSpeech = it.data.choices[0].text
+                        messageSpeech = it.data.choices[0].message.content
                         val checked = mySharedPreference.getPreferences(Constants.CHECKED)
-                        updateEverything(it.data.choices[0].text, false)
+                        updateEverything(it.data.choices[0].message.content, false)
                         if (checked != "") {
                             if (checked.toBoolean()) {
-                                speakFun(it.data.choices[0].text, actualProgress = actualProgress)
+                                speakFun(
+                                    it.data.choices[0].message.content,
+                                    actualProgress = actualProgress
+                                )
                             }
                         } else {
-                            speakFun(it.data.choices[0].text, actualProgress = actualProgress)
+                            speakFun(
+                                it.data.choices[0].message.content,
+                                actualProgress = actualProgress
+                            )
                         }
 
                     }
@@ -372,7 +429,14 @@ class ThreadFragment : Fragment(R.layout.fragment_thread) {
                 val editTextString = editText.text.toString()
                 if (editTextString != "") {
                     updateEverything(editTextString, true)
-                    requestTheApi(editTextString)
+                    if (viewModel.freeMessageCount.value == 0) {
+                        viewModel.setTheCount(-1)
+                    }
+                    if (viewModel.freeMessageCount.value!! > 0) {
+
+                        requestTheApi(editTextString)
+                    }
+
                     editText.setText("")
                 } else {
                     Toast.makeText(
@@ -384,12 +448,16 @@ class ThreadFragment : Fragment(R.layout.fragment_thread) {
 
             }
 
+            goPro.setOnClickListener {
+                findNavController().navigate(R.id.trialFragment)
+            }
 
         }
 
 
         return binding.root
     }
+
 
     private fun filterByText(filterKey: String) {
         val newList = kotlin.collections.ArrayList<MessageModule>()
@@ -400,6 +468,7 @@ class ThreadFragment : Fragment(R.layout.fragment_thread) {
                 newList.add(existingList[i])
             }
         }
+
         messageAdapter.setList(newList)
 
     }
@@ -451,17 +520,14 @@ class ThreadFragment : Fragment(R.layout.fragment_thread) {
                                 Handler(Looper.getMainLooper()).postDelayed({
                                     binding.send.isEnabled = true
                                 }, 400)
+
                             }
-
-
                         }
                     }
                     viewModel.getChatResponse(
-                        Message(
-                            prompt = message,
-                            max_tokens = 1000,
-                            model = "text-davinci-003",
-                            temperature = 0
+                        RequestBody(
+                            model = "gpt-3.5-turbo",
+                            messages = listOf(MessageX(content = message, role = "system"))
                         ), token
                     )
 
@@ -516,7 +582,7 @@ class ThreadFragment : Fragment(R.layout.fragment_thread) {
                 }
             }
         } else {
-            if (textToSpeech!!.isSpeaking){
+            if (textToSpeech!!.isSpeaking) {
                 textToSpeech!!.stop()
             }
             textToSpeech!!.setSpeechRate(actualProgress)

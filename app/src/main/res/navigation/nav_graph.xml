@@ -21,7 +21,11 @@
         android:id="@+id/threadFragment"
         android:name="com.chat.aichatbot.fragments.ThreadFragment"
         android:label="fragment_thread"
-        tools:layout="@layout/fragment_thread" />
+        tools:layout="@layout/fragment_thread" >
+        <action
+            android:id="@+id/action_threadFragment_to_trialFragment"
+            app:destination="@id/trialFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.chat.aichatbot.fragments.MainFragment"
@@ -34,4 +38,9 @@
             android:id="@+id/action_mainFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/trialFragment"
+        android:name="com.chat.aichatbot.fragments.TrialFragment"
+        android:label="fragment_trial"
+        tools:layout="@layout/fragment_trial" />
 </navigation>

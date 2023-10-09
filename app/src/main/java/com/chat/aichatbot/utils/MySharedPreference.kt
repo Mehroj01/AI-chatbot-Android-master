@@ -18,4 +18,24 @@ class MySharedPreference(context: Context) {
             ""
         } else json
     }
+
+    fun setIntPreference(key: String, value: Int) {
+        val prefsEditor = appSharedPrefs?.edit()
+        prefsEditor?.putInt(key, value)
+        prefsEditor?.apply()
+    }
+
+    fun getIntPreference(key: String): Int {
+        return appSharedPrefs?.getInt(key, -1) ?: -1
+    }
+
+    fun setBoolPreference(key: String, value: Boolean?) {
+        val prefsEditor = appSharedPrefs?.edit()
+        prefsEditor?.putBoolean(key, value!!)
+        prefsEditor?.apply()
+    }
+
+    fun getBoolPreference(key: String): Boolean {
+        return appSharedPrefs?.getBoolean(key, false) ?: false
+    }
 }

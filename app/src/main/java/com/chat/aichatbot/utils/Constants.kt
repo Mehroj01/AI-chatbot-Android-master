@@ -3,9 +3,11 @@ package com.chat.aichatbot.utils
 import com.chat.aichatbot.models.StaticModule
 
 object Constants {
-    const val CHECKED: String="checked"
+    const val CHECKED: String = "checked"
     const val TV_SIZE = "tv_size"
-    const val SLIDER_PROGRESS = "SLIDER_PROGRESS"
+    const val SLIDER_PROGRESS = "slider_progress"
+    const val FREE_MESSAGES_COUNT = "messagesLeft"
+    const val PROMO_ACTIVE = "promo_active"
     val arrayList = arrayListOf(
         StaticModule(
             "Ask Questions...", arrayListOf(

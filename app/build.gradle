@@ -79,6 +79,10 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
 
 
+    // billing
+    def billing_version = "5.1.0"
+
+    implementation("com.android.billingclient:billing-ktx:$billing_version")
 
 
 }

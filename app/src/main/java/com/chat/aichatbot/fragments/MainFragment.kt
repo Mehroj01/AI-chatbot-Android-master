@@ -36,7 +36,6 @@ import kotlin.collections.ArrayList
 import kotlin.collections.LinkedHashSet
 
 
-
 class MainFragment : Fragment() {
 
 
@@ -85,7 +84,7 @@ class MainFragment : Fragment() {
                 val view = LayoutInflater.from(requireContext())
                     .inflate(R.layout.settings_bottom_sheet, null)
                 dialog.setContentView(view)
-                dialog.setCancelable(false)
+                dialog.setCancelable(true)
                 val back = view.findViewById<ImageView>(R.id.back)
                 val spinnerView = view.findViewById<Spinner>(R.id.sizesSpinner)
                 val slider = view.findViewById<SeekBar>(R.id.speedSeekBar)
@@ -131,7 +130,7 @@ class MainFragment : Fragment() {
 
                 shareApp.setOnClickListener {
                     val shareIntent = Intent(Intent.ACTION_SEND)
-                    shareIntent.setType("text/plain")
+                    shareIntent.type = "text/plain"
                     shareIntent.putExtra(Intent.EXTRA_TEXT, "Check out this awesome app!")
                     startActivity(Intent.createChooser(shareIntent, "Share app using"))
                 }
@@ -166,7 +165,8 @@ class MainFragment : Fragment() {
 
                 back.setOnClickListener {
                     dialog.dismiss()
-                    Toast.makeText(requireContext(), "Your settings is saved", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Your settings is saved", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
                 spinnerView.onItemSelectedListener = object : AdapterView.OnItemSelectedListener,
@@ -201,6 +201,7 @@ class MainFragment : Fragment() {
 
             searchBar.setOnClickListener {
                 if (!isSearchBar) {
+                    startChat.visibility = View.GONE
                     searchIcon.setImageResource(R.drawable.x_icon)
                     searchEdit.visibility = View.VISIBLE
                     searchEdit.hint = "Search..."
@@ -210,6 +211,7 @@ class MainFragment : Fragment() {
                         requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     inputMethodManager.showSoftInput(searchEdit, InputMethodManager.SHOW_IMPLICIT)
                     menuBar.setOnClickListener {
+                        startChat.visibility = View.VISIBLE
                         val imm =
                             requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                         imm.hideSoftInputFromWindow(requireView().windowToken, 0)
@@ -325,6 +327,13 @@ class MainFragment : Fragment() {
                 threadList.add(threadsList[i])
             }
         }
+
+        if (threadList.isEmpty()) {
+            binding.dataNotFound.visibility = View.VISIBLE
+        } else {
+            binding.dataNotFound.visibility = View.GONE
+        }
+
         threadAdapter.submitList(kotlin.collections.ArrayList(threadList))
     }
 

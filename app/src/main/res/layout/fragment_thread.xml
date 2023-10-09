@@ -13,32 +13,32 @@
         android:layout_height="56dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:visibility="gone"
         android:layout_marginEnd="15dp"
         android:background="@drawable/send_message_bg"
         android:elevation="6dp"
         android:orientation="horizontal"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/menuBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="10dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:visibility="invisible"
+            android:layout_gravity="center"
             android:layout_marginStart="10dp"
-            android:src="@drawable/icon" />
+            android:padding="10dp"
+            android:src="@drawable/icon"
+            android:visibility="invisible" />
 
         <EditText
             android:id="@+id/searchEdit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_centerInParent="true"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="80dp"
-            android:layout_centerInParent="true"
             android:background="@android:color/transparent"
             android:visibility="invisible" />
 
@@ -46,10 +46,10 @@
             android:id="@+id/searchIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:padding="10dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:padding="10dp"
             android:src="@drawable/search_icon" />
 
     </RelativeLayout>
@@ -59,8 +59,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:src="@drawable/icon"
         android:padding="10dp"
+        android:src="@drawable/icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -77,7 +77,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/back" />
-
 
 
     <ImageView
@@ -105,10 +104,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
-        android:translationZ="100dp"
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:translationZ="100dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -120,11 +119,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:paddingBottom="60dp"
-        tools:listitem="@layout/message_item"
+        android:paddingBottom="110dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="@+id/relative"
-        app:layout_constraintTop_toBottomOf="@id/back" />
+        app:layout_constraintTop_toBottomOf="@id/back"
+        tools:listitem="@layout/message_item" />
 
     <View
         android:layout_width="match_parent"
@@ -132,6 +131,48 @@
         android:alpha="0.5"
         android:background="@drawable/shadowy"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/promoOffer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/promo_button"
+        app:layout_constraintBottom_toTopOf="@+id/relative">
+
+        <TextView
+            android:id="@+id/messagesLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/you_have_3_free_message_left"
+            android:textColor="@color/black1"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/goPro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/promo_button"
+            android:backgroundTint="#191A1A1A"
+            android:fontFamily="sans-serif"
+            android:paddingStart="14dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="14dp"
+            android:paddingBottom="10dp"
+            android:text="@string/go_pro"
+            android:textColor="@color/black1"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relative"
@@ -147,11 +188,11 @@
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:layout_marginEnd="40dp"
             android:background="@drawable/send_message_bg"
             android:hint="@string/write_question"
             android:inputType="text"
             android:padding="10dp"
-            android:layout_marginEnd="40dp"
             android:textSize="16sp" />
 
         <ImageView

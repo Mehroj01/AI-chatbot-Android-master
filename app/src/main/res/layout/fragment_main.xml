@@ -6,11 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".fragments.MainFragment">
 
+    <TextView
+        android:id="@+id/dataNotFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="@string/data_is_not_found"
+        android:textColor="@color/black1"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/search_bg"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,27 +41,29 @@
 
     <RelativeLayout
         android:id="@+id/searchBar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/send_message_bg"
         android:elevation="6dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/settings">
+        app:layout_constraintBottom_toBottomOf="@id/settings"
+        app:layout_constraintEnd_toStartOf="@+id/settings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/settings">
 
         <ImageView
             android:id="@+id/menuBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="10dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:visibility="invisible"
+            android:layout_gravity="center"
             android:layout_marginStart="10dp"
-            android:src="@drawable/icon" />
+            android:padding="10dp"
+            android:src="@drawable/icon"
+            android:visibility="invisible" />
 
         <EditText
             android:id="@+id/searchEdit"
@@ -62,10 +79,10 @@
             android:id="@+id/searchIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:padding="10dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:padding="10dp"
             android:src="@drawable/search_icon" />
 
     </RelativeLayout>

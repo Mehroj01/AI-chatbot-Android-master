@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.chat.aichatbot.models.ChatResponse
 import com.chat.aichatbot.models.Message
 import com.chat.aichatbot.models.MessageModule
+import com.chat.aichatbot.models.RequestBody
 import com.chat.aichatbot.retrofit.ApiClient
 import com.chat.aichatbot.retrofit.ApiService
 import com.chat.aichatbot.utils.EventLoader
@@ -30,6 +31,10 @@ class MainViewModel : ViewModel() {
     val isLoading: LiveData<Boolean>
         get() = _isLoading
     private var isKeyFetched = false
+
+    private val _freeMessageCount = MutableLiveData<Int>()
+    val freeMessageCount: LiveData<Int>
+        get() = _freeMessageCount
 
     fun getTheKey() {
         if (!isKeyFetched) {
@@ -53,7 +58,7 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun getChatResponse(message: Message, token: String) {
+    fun getChatResponse(message: RequestBody, token: String) {
         _isLoading.value = true
         _chatResponse.value = null
 
@@ -65,6 +70,7 @@ class MainViewModel : ViewModel() {
                 }
                 if (response.isSuccessful) {
                     _chatResponse.value = EventLoader.Success(response.body()!!)
+                    _freeMessageCount.value = _freeMessageCount.value!! - 1
                 }
             } catch (e: SocketTimeoutException) {
                 _chatResponse.value = EventLoader.Error("Timeout error")
@@ -75,5 +81,9 @@ class MainViewModel : ViewModel() {
             }
 
         }
+    }
+
+    fun setTheCount(count: Int) {
+        _freeMessageCount.value = count
     }
 }

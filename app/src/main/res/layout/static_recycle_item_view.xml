@@ -16,7 +16,7 @@
         android:fontFamily="sans-serif"
         android:text="@string/ask_questions"
         android:textColor="@color/black1"
-        android:textSize="17dp"
+        android:textSize="19dp"
         android:textStyle="bold" />
 
     <RelativeLayout
@@ -35,7 +35,7 @@
             android:fontFamily="sans-serif"
             android:text="@string/explain_how_internet_works_for_6_year_old"
             android:textColor="@color/black1"
-            android:textSize="16dp" />
+            android:textSize="18dp" />
 
         <ImageView
             android:id="@+id/arrow1"
@@ -63,7 +63,7 @@
             android:fontFamily="sans-serif"
             android:text="@string/why_is_the_sky_blue"
             android:textColor="@color/black1"
-            android:textSize="16dp" />
+            android:textSize="18dp" />
 
         <ImageView
             android:id="@+id/arrow2"
@@ -91,7 +91,7 @@
             android:fontFamily="sans-serif"
             android:text="@string/got_any_creative_ideas_for_a_5_year_old_s_birthday"
             android:textColor="@color/black1"
-            android:textSize="16dp" />
+            android:textSize="18dp" />
 
         <ImageView
             android:id="@+id/arrow3"

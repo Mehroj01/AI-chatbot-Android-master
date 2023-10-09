@@ -20,7 +20,7 @@
         android:paddingTop="0dp"
         android:text="How to design Perfect UX for app with best user interface design"
         android:textColor="@color/black1"
-        android:textSize="17dp"
+        android:textSize="19dp"
         android:textStyle="normal" />
 
     <ImageView

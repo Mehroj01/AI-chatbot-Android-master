@@ -12,9 +12,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:gravity="center"
-        android:text="20sp"
+        android:text="22sp"
         android:textColor="#5C5F62"
         android:padding="8dp" />
 

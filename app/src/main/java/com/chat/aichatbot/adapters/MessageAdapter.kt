@@ -7,18 +7,22 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 import com.chat.aichatbot.R
 import com.chat.aichatbot.databinding.MessageItemBinding
+import com.chat.aichatbot.databinding.OutOfMessagesItemBinding
 import com.chat.aichatbot.models.MessageModule
 import com.chat.aichatbot.room.AppDatabase
 import com.chat.aichatbot.utils.Constants
@@ -36,9 +40,8 @@ class MessageAdapter(
 ) : RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
     private var mySharePreference: MySharedPreference = MySharedPreference(context)
 
-    class ViewHolder(var binding: MessageItemBinding) :
+    class ViewHolder(var binding: ViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
     }
 
 
@@ -46,38 +49,64 @@ class MessageAdapter(
         val binding =
             MessageItemBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
 
-        if (viewType == USER_MESSAGE) {
-            binding.relativeLayout.setBackgroundColor(
-                ContextCompat.getColor(
-                    viewGroup.context,
-                    R.color.user_color
+        when (viewType) {
+            USER_MESSAGE -> {
+                binding.relativeLayout.setBackgroundColor(
+                    ContextCompat.getColor(
+                        viewGroup.context,
+                        R.color.user_color
+                    )
                 )
-            )
-            binding.contextualMenu.visibility = View.INVISIBLE
-        } else {
-            binding.relativeLayout.setBackgroundColor(
-                ContextCompat.getColor(
-                    viewGroup.context,
-                    android.R.color.transparent
+                binding.contextualMenu.visibility = View.INVISIBLE
+            }
+            AI_MESSAGE -> {
+                binding.relativeLayout.setBackgroundColor(
+                    ContextCompat.getColor(
+                        viewGroup.context,
+                        android.R.color.transparent
+                    )
                 )
-            )
-            binding.contextualMenu.visibility = View.VISIBLE
+                binding.contextualMenu.visibility = View.VISIBLE
+            }
+            OUT_OF_MESSAGES -> {
+                val binding1 =
+                    OutOfMessagesItemBinding.inflate(
+                        LayoutInflater.from(viewGroup.context),
+                        viewGroup,
+                        false
+                    )
+
+                return ViewHolder(binding1)
+            }
         }
+
+
         return ViewHolder(binding)
     }
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val module = list[position]
-        holder.binding.question.text = module.message
-        val size = mySharePreference.getPreferences(Constants.TV_SIZE)
-        if (size != "") {
-            TextSizeValue.setSizeToTV(
-                size!!.toFloat(), holder.binding.question
-            )
-        }
-        holder.binding.contextualMenu.setOnClickListener {
-            showPopUpIcon(it, module, holder.adapterPosition)
+        if (list[holder.adapterPosition].id != -1) {
+            val binding = holder.binding as MessageItemBinding
+            val module = list[position]
+            binding.question.text = module.message
+            val size = mySharePreference.getPreferences(Constants.TV_SIZE)
+            if (size != "") {
+                TextSizeValue.setSizeToTV(
+                    size!!.toFloat(), binding.question
+                )
+            }
+            binding.contextualMenu.setOnClickListener {
+                showPopUpIcon(it, module, holder.adapterPosition)
+            }
+        } else {
+            val binding = holder.binding as OutOfMessagesItemBinding
+            binding.apply {
+                startTrial.setOnClickListener {
+                    itemClickListener.navigate()
+                }
+            }
+            displayTheText(binding.question, holder.itemView.context, binding.startTrial)
         }
 
 
@@ -193,8 +222,17 @@ class MessageAdapter(
 
     }
 
+    fun setOutOfMessages(message: MessageModule, recyclerView: RecyclerView) {
+        list.add(message)
+        notifyItemInserted(list.size)
+        recyclerView.scrollToPosition(this.itemCount - 1)
+    }
+
 
     override fun getItemViewType(position: Int): Int {
+        if (list[position].id == -1) {
+            return OUT_OF_MESSAGES
+        }
         return if (list[position].isUser) {
             USER_MESSAGE
         } else {
@@ -227,13 +265,36 @@ class MessageAdapter(
     companion object {
         private const val USER_MESSAGE = 0
         private const val AI_MESSAGE = 1
+        private const val OUT_OF_MESSAGES = 2
     }
 
 
     interface ItemOnClickListener {
         fun speak(module: MessageModule)
         fun deleteItem(message: MessageModule, aiMessage: MessageModule? = null, position: Int)
+
+        fun navigate()
     }
 
+    private fun displayTheText(textView: TextView, context: Context, linearLayout: LinearLayout) {
+        val text = context.getText(R.string.out_of_free_messages)
 
+        var index = 0
+        val handler = Handler(Looper.getMainLooper())
+
+        val characterAdder = object : Runnable {
+            override fun run() {
+                textView.text = text.subSequence(0, ++index)
+                if (index < text.length) {
+                    handler.postDelayed(this, 30)
+                }
+            }
+        }
+
+        handler.postDelayed(characterAdder, 0)
+        Handler(Looper.getMainLooper()).postDelayed({
+            linearLayout.visibility = View.VISIBLE
+        }, 320 * 30)
+    }
 }
+
